@@ -6,6 +6,7 @@ class TestResultSerializer(serializers.ModelSerializer):
     class Meta:
         model = TestResult
         fields = '__all__'
+        read_only_fields = ['user']
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

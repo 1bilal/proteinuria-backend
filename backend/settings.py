@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-)fd5zqr8qavaymqb1+tnehdcin6&er0fmesifpzcw*ung_c9ry
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.244.41', '127.0.0.1', 'localhost', '192.168.161.16']  # Add your server's IP address here
+ALLOWED_HOSTS = ['*', '127.0.0.1', '192.168.43.137']  # Add your server's IP address here
 
 
 # Application definition
@@ -137,3 +137,7 @@ REST_FRAMEWORK = {
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = True  # Allow all origins for development purposes
 CORS_ALLOW_CREDENTIALS = True  # Allow credentials to be included in requests
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store uploaded files
