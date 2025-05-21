@@ -1,7 +1,6 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
+from accounts.models import User  # Import custom User model
 from .models import TestResult
-
 
 class TestResultSerializer(serializers.ModelSerializer):
     result = serializers.CharField(required=False, allow_blank=True, allow_null=True)
@@ -12,13 +11,8 @@ class TestResultSerializer(serializers.ModelSerializer):
         read_only_fields = ['user']
 
     def validate(self, data):
-        print("Incoming data:", data)
-        
         entry_method = data.get('entry_method')
         result = data.get('result')
-
-        print("entry_method:", entry_method)
-        print("result:", result)
 
         if entry_method == TestResult.USER_INPUT and not result:
             raise serializers.ValidationError({
@@ -30,9 +24,3 @@ class TestResultSerializer(serializers.ModelSerializer):
 
         return data
 
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name']

@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.utils.timezone import now
 
 class TestResult(models.Model):
@@ -11,7 +11,7 @@ class TestResult(models.Model):
         (AUTO_DETECTED, 'Auto Detected')
     ]
     
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     result = models.CharField(max_length=10)  # e.g., Negative, Trace, +1, +2, +3
     image = models.ImageField(upload_to='test_images/', null=True, blank=True)
     entry_method = models.CharField(max_length=10, choices=ENTRY_METHOD_CHOICES)

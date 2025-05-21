@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'api',
+    'accounts',
     'corsheaders',
 ]
 
@@ -141,3 +142,5 @@ CORS_ALLOW_CREDENTIALS = True  # Allow credentials to be included in requests
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store uploaded files
+
+AUTH_USER_MODEL = 'accounts.User'

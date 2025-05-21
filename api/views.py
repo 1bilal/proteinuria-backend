@@ -1,16 +1,12 @@
-from rest_framework import viewsets, permissions
-from rest_framework.response import Response
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 from .models import TestResult
-from .serializers import TestResultSerializer, UserSerializer
+from .serializers import TestResultSerializer
 from .utils.color_detection import detect_color
-
-
 
 class TestResultViewSet(viewsets.ModelViewSet):
     queryset = TestResult.objects.all()
@@ -33,14 +29,3 @@ class TestResultViewSet(viewsets.ModelViewSet):
     
     def get_queryset(self):
         return TestResult.objects.filter(user=self.request.user)
-
-# User Info API
-from rest_framework.authentication import TokenAuthentication
-
-@api_view(['GET'])
-@permission_classes([permissions.IsAuthenticated])
-@authentication_classes([TokenAuthentication])  # Add Token Authentication here
-def user_info(request):
-    serializer = UserSerializer(request.user)
-    print(serializer.data)  # Debug: Check the serialized data
-    return Response(serializer.data)

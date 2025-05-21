@@ -21,7 +21,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('api.urls')),
+    path('', include('api.urls')),  # Include the accounts app URLs
+    path('api/accounts/', include('accounts.urls')),
+
+
 ]
 
 if settings.DEBUG:
