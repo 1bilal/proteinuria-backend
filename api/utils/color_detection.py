@@ -1,10 +1,11 @@
-from PIL import Image
 import numpy as np
+from PIL import Image
+
 
 def detect_color(image_field):
     try:
         image = Image.open(image_field)
-        image = image.convert('RGB')
+        image = image.convert("RGB")
         image = image.resize((50, 50))
 
         np_img = np.array(image)

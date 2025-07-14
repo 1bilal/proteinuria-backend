@@ -16,16 +16,39 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='TestResult',
+            name="TestResult",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('result', models.CharField(max_length=10)),
-                ('image', models.ImageField(blank=True, null=True, upload_to='test_images/')),
-                ('entry_method', models.CharField(choices=[('manual', 'Manual Entry'), ('auto', 'Auto Detected')], max_length=10)),
-                ('timestamp', models.DateTimeField(default=django.utils.timezone.now)),
-                ('notes', models.TextField(blank=True, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("result", models.CharField(max_length=10)),
+                (
+                    "image",
+                    models.ImageField(blank=True, null=True, upload_to="test_images/"),
+                ),
+                (
+                    "entry_method",
+                    models.CharField(
+                        choices=[("manual", "Manual Entry"), ("auto", "Auto Detected")],
+                        max_length=10,
+                    ),
+                ),
+                ("timestamp", models.DateTimeField(default=django.utils.timezone.now)),
+                ("notes", models.TextField(blank=True, null=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
