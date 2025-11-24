@@ -15,18 +15,14 @@ class TestResultViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        entry_method = self.request.data.get("entry_method", "manual")
         image = self.request.FILES.get("image")
-        result = self.request.data.get("result")
 
-        if entry_method == "auto" and not result:
-            print("Auto mode: Detecting color...")
+        if image:  # If an image is present, it's an auto-detection
             result = detect_color(image)
-            print("Detected color:", result)
-
             serializer.save(user=self.request.user, entry_method="auto", result=result)
-        else:
-            serializer.save(user=self.request.user, entry_method=entry_method)
+        else:  # No image means it's a manual entry
+            # The serializer's `validate` method ensures `result` is present for manual entries
+            serializer.save(user=self.request.user, entry_method="manual")
 
     def get_queryset(self):
         return TestResult.objects.filter(user=self.request.user)

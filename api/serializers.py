@@ -8,7 +8,7 @@ class TestResultSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TestResult
-        fields = "__all__"
+        fields = ["id", "result", "image", "entry_method", "timestamp", "notes", "created_at"]
         read_only_fields = ["user"]
 
     def validate(self, data):
